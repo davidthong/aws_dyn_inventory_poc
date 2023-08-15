@@ -3,8 +3,8 @@ plugin: aws_ec2
 
 regions:
   - us-east-1
-  - eu-central-1
-iam_role_arn: "arn:aws:iam::971446310398:role/AnsibleTowerRole"
+  
+iam_role_arn: "arn:aws:iam::511309077648:role/ec2_dynamic_inventory"
 
 vpc_destination_variable: private_ip_address
 
@@ -73,7 +73,7 @@ compose:
   # Use the private IP address to connect to the host
   # (note: this does not modify inventory_hostname, which is set via I(hostnames))
   ansible_host: private_ip_address
-  iam_role_arn: '"arn:aws:iam::971446310398:role/AnsibleTowerRole"'
+  iam_role_arn: '"arn:aws:iam::511309077648:role/ec2_dynamic_inventory"'
   aws_region: placement.region
   vpc_fn: '"Test_VPC"'
   aws_type: '"EC2"'
