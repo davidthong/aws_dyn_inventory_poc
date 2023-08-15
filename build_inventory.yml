@@ -25,7 +25,7 @@
         source: "scm"
         source_project: "POC"
         source_path: "inventory/poc.aws_ec2.yml"
-        credential: "_ansible-twr"
+        credential: "AWS"
    
 
 
