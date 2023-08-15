@@ -1,0 +1,39 @@
+---
+- name: Build Patch Group Inventory
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+    - name: Create Inventory
+      ansible.controller.inventory:
+          name: "POC AWS"
+          description: ""
+          organization: "Default"
+          state: present
+     
+
+    - name: Add AWS inventory source
+      ansible.controller.inventory_source:
+        name: "AWS EC2 - POC"
+        description: "POC"
+        inventory: "POC AWS"
+        overwrite: True
+        update_on_launch: True
+        overwrite_vars: True
+        organization: Default
+        source: "scm"
+        source_project: "POC"
+        source_path: "inventory/poc.aws_ec2.yml"
+        credential: "_ansible-twr"
+   
+
+
+    # - name: Update AWS inventory sources
+    #   ansible.controller.inventory_source_update:
+    #     name: "AWS EC2 - {{survey_patch_group }}"
+    #     inventory: "Patch Group - {{ survey_patch_group }}"
+    #   when: survey_aws_vpc is defined
+    
+    
+   
