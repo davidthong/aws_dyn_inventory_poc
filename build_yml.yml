@@ -8,22 +8,38 @@
 
   tasks:
 
-    # - name: Git checkout
-    #   ansible.builtin.git:
-    #     repo: "{{ git_repo }}"
-    #     dest: "{{ working_directory }}"
-    #     version: main
+    - name: Git checkout
+      ansible.builtin.git:
+        repo: "{{ git_repo }}"
+        dest: "{{ playbook_dir }}"
+        version: main
       #  version: "aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
 
     - ansible.builtin.debug: var=playbook_dir
 
-    - name: Git 
-      ansible.builtin.shell: "git clone {{ git_repo }}"
+  
+    - ansible.builtin.set_fact:
+         git_branch: "aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
+
+
+    - name: Create new branch
+      ansible.builtin.shell: "git checkout -b {{ git_branch }}"
       args:
          chdir: "{{ playbook_dir }}"
-      register: version
-    
-    - ansible.builtin.debug: var=version
+
+    - name: current branch
+      ansible.builtin.shell: "git branch"
+      args:
+         chdir: "{{ playbook_dir }}"
+
+    - name: Create new branch
+      ansible.builtin.shell: "git status"
+      args:
+         chdir: "{{ playbook_dir }}"
+      register: status
+
+    - ansible.builtin.debug: var=playbook_dir
+
 
     # - name: Set facts
     #   ansible.builtin.set_fact:
