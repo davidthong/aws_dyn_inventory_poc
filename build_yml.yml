@@ -15,6 +15,8 @@
     #     version: main
       #  version: "aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
 
+    - ansible.builtin.debug: var=playbook_dir
+    
     - name: Git 
       ansible.builtin.shell: "git clone {{ git_repo }}"
          chdir: "{{ playbook_dir }}"
