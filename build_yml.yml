@@ -52,42 +52,26 @@
     loop:
       - "{{ playbook_dir }}/inventory"
 
-  - name: "Git status after copy"
-    ansible.builtin.shell: "git add -A"
+  - name: "Add output directory to git"
+    ansible.builtin.shell: |
+      git config --global user.name "rhaap"
+      git config --global user.email "rhaap@rhaap.com"
+      git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible  " && git push
     args:
       chdir: "{{ git_working_directory }}"
+    ignore_errors: true
+    register: output
+    failed_when: >
+      output.msg != "" and
+      ("error" in output.msg or
+      "conflict" in output.msg or
+      "Errno" in output.msg or
+      "fatal" in output.msg or
+      (output.stdout != "" and
+      "nothing to commit, working tree clean" not in output.stdout) or
+      (output.stderr != ""))
 
-  - name: "Git status after copy"
-    ansible.builtin.shell: "git status"
-    args:
-      chdir: "{{ git_working_directory }}"
 
-
-  # - name: "Add output directory to git"
-  #   ansible.builtin.shell: |
-  #     git config --global user.name "rhaap"
-  #     git config --global user.email "rhaap@rhaap.com"
-  #     git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible  " && git push
-  #   args:
-  #     chdir: "{{ git_working_directory }}"
-  #   ignore_errors: true
-  #   register: output
-  #   failed_when: >
-  #     output.msg != "" and
-  #     ("error" in output.msg or
-  #     "conflict" in output.msg or
-  #     "Errno" in output.msg or
-  #     "fatal" in output.msg or
-  #     (output.stdout != "" and
-  #     "nothing to commit, working tree clean" not in output.stdout) or
-  #     (output.stderr != ""))
-
-    # - name: Git checkout
-    #   ansible.builtin.git:
-    #     repo: "{{ git_repo }}"
-    #     dest: "{{ playbook_dir }}"
-    #     version: main
-      #  version: "aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
 
    
 
