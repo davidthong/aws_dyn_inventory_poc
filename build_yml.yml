@@ -53,6 +53,11 @@
       - "{{ playbook_dir }}/inventory"
 
   - name: "Git status after copy"
+    ansible.builtin.shell: "git add -A"
+    args:
+      chdir: "{{ git_working_directory }}"
+
+  - name: "Git status after copy"
     ansible.builtin.shell: "git status"
     args:
       chdir: "{{ git_working_directory }}"
