@@ -8,7 +8,7 @@
 
   tasks:
 
-  - name: Clone GIT Repository
+  - name: Clone AWS Inventory Repo
     ansible.builtin.git:
       repo: "{{ git_repo }}"
       dest: "{{ git_working_directory }}"
@@ -16,8 +16,13 @@
       update: yes
       version: main
 
-  - name: "Git branch"
-    ansible.builtin.shell: git branch
+  - name: "Create a new branch with current timestamp"
+    ansible.builtin.shell: "git checkout -b aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
+    args:
+      chdir: "{{ git_working_directory }}"
+  
+  - name: "Current branch"
+    ansible.builtin.shell: "git branch"
     args:
       chdir: "{{ git_working_directory }}"
 
