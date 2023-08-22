@@ -20,42 +20,42 @@
     ansible.builtin.shell: "git checkout -b aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
     args:
       chdir: "{{ git_working_directory }}"
-  
-  - name: "Current branch"
-    ansible.builtin.shell: "git branch"
+
+  - name: Set facts
+    ansible.builtin.set_fact:
+      var2:
+        - 511309077648
+        - 311331131131
+
+  - name: Copy Content
+    ansible.builtin.blockinfile:
+      path: vars/aws_inventory_sources.yml
+      block: "{{ var2 | to_nice_yaml }}"
+      insertafter: "aig_accounts"
+      mode: "0755"
+
+  - name: Build Inventory Sources
+    ansible.builtin.template:
+        src: aws_ec2.yml.j2
+        dest: inventory/aig_{{ aws_account }}_aws_ec2.yml
+    loop_control:
+        loop_var: aws_account
+    loop: "{{aig_aws_accounts}}"
+
+
+
+  - name: Copy generated inventory to git working directory
+    copy:
+      dest: "{{ git_working_directory }}"
+      src: "{{ item }}"
+      force: true
+    loop:
+      - "{{ playbook_dir }}/inventory"
+
+  - name: "Git status after copy"
+    ansible.builtin.shell: "git status"
     args:
       chdir: "{{ git_working_directory }}"
-
-  # - name: Set facts
-  #   ansible.builtin.set_fact:
-  #     var2:
-  #       - 511309077648
-  #       - 311331131131
-
-  # - name: Copy Content
-  #   ansible.builtin.blockinfile:
-  #     path: vars/aws_inventory_sources.yml
-  #     block: "{{ var2 | to_nice_yaml }}"
-  #     insertafter: "aig_accounts"
-  #     mode: "0755"
-
-  # - name: Build Inventory Sources
-  #   ansible.builtin.template:
-  #       src: aws_ec2.yml.j2
-  #       dest: inventory/aig_{{ aws_account }}_aws_ec2.yml
-  #   loop_control:
-  #       loop_var: aws_account
-  #   loop: "{{aig_aws_accounts}}"
-
-
-
-  # - name: Copy generated inventory to git working directory
-  #   copy:
-  #     dest: "{{ git_working_directory }}"
-  #     src: "{{ item }}"
-  #     force: true
-  #   loop:
-  #     - "{{ playbook_dir }}/inventory"
 
 
   # - name: "Add output directory to git"
