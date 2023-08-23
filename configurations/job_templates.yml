@@ -8,6 +8,8 @@ job_templates:
   forks: 0
   inventory: 
     name: Demo Inventory
+    organization: {name: Default, type: organization}
+    type: project
   natural_key:
     name: Create/Update and Push Inventory Sources
     type: job_template
