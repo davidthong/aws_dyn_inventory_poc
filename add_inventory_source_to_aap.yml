@@ -1,5 +1,5 @@
 ---
-- name: Build Patch Group Inventory
+- name: Add Inventory Source to AAP
   hosts: localhost
   connection: local
   vars_files: aws_inventory_sources.yml

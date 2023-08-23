@@ -1,5 +1,5 @@
 ---
-- name: Build YML File
+- name: Build And Push Inventory Sources
   hosts: localhost
   connection: local
   vars_files:
