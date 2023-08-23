@@ -1,2 +1,3 @@
 git_repo: https://github.com/davidthong/aws_dyn_inventory_poc.git
 git_working_directory: /tmp/aws_inventory/
+repo_name: aws_dyn_inventory_poc

@@ -7,7 +7,7 @@
     - main.yml
 
   tasks:
-
+  
   - name: Clone AWS Inventory Repo
     ansible.builtin.git:
       repo: "{{ git_repo }}"
@@ -75,13 +75,17 @@
       "nothing to commit, working tree clean" not in output.stdout) or
       (output.stderr != ""))
 
-  - name: Push Changes
-    ansible.builtin.shell: "git push --set-upstream origin {{ git_branch }} --force"
-    args:
-      chdir: "{{ git_working_directory }}"
-    register: push_output
-    environment:
-       GIT_SSH: "{{ git_working_directory }}/.ssh/ssh"
+- name: Set remote url
+  ansible.builtin.shell: "git remote set-url origin https://davidthong:{{ github_pat }}@github.com/davidthong/aws_dyn_inventory_poc.git"
+  args:
+    chdir: "{{ git_working_directory }}"
+  
+- name: Push Changes
+  ansible.builtin.shell: "git push --set-upstream origin {{ git_branch }} --force"
+  args:
+    chdir: "{{ git_working_directory }}"
+  register: push_output
+
 
 
 
