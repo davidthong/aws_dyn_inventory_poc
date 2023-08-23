@@ -23,7 +23,7 @@
         overwrite_vars: True
         organization: Default
         source: "scm"
-        source_project: "POC"
+        source_project: "David POC"
         source_path: "inventory/aig_{{ aws_account }}.aws_ec2.yml"
         credential: "AWS"
       loop: "{{ aig_aws_accounts }}"
