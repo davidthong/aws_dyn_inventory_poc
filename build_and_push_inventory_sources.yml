@@ -97,7 +97,7 @@
           Authorization: "Bearer {{ git_token }}"
         url: "{{ github_api_url }}"
         body:
-          title: "AWS Inventory Changes - {{ ansible_date_time }}"
+          title: "AWS Inventory Changes - {{ ansible_date_time.date }} @ {{ ansible_date_time.time }}"
           head: "{{ git_username }}:{{ git_develop_branch }}"
           base: "{{ git_base_branch }}"
         body_format: json
