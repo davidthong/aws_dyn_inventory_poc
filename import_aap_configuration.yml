@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  connection: local
+
+  collections: 
+  - ansible.controller
+  
+  pre_tasks:
+  - name: set fact on the configs directory
+    set_fact: 
+      config_path: "{{ playbook_dir }}/configurations"
+
+  - name: Include configurations from configurations' directory
+    include_vars:
+      dir: "{{ config_path }}" 
+      extensions: ["yml","json"]
+    register: config_files
+
+  tasks:
+  - name: Import Assets
+    ansible.controller.import: 
+      assets: "{{ config_files.ansible_facts | from_yaml | to_json }}" 
+      controller_host: "{{ import_controller_host }}"
+      controller_username: "{{ import_controller_username }}"
+      controller_password: "{{ import_controller_password }}"
+      validate_certs: False
+    register: import_results
