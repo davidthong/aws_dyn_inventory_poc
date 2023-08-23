@@ -76,10 +76,12 @@
       (output.stderr != ""))
 
   - name: Push Changes
-    ansible.builtin.shell: "git push --set-upstream origin {{ git_branch }}"
+    ansible.builtin.shell: "git push --set-upstream origin {{ git_branch }} --force"
     args:
       chdir: "{{ git_working_directory }}"
     register: push_output
+    environment:
+       GIT_SSH: "{{ git_working_directory }}/.ssh/ssh"
 
 
 
