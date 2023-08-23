@@ -78,7 +78,7 @@
         (output.stderr != ""))
 
     - name: Set remote url
-      ansible.builtin.shell: "git remote set-url origin https://{{ git_username }}:{{ git_token }}@github.com/{{ git_username }}/{{ github_reponame }}.git"
+      ansible.builtin.shell: "git remote set-url origin https://{{ github_username }}:{{ github_token }}@github.com/{{ github_username }}/{{ github_reponame }}.git"
       args:
         chdir: "{{ git_working_directory }}"
       no_log: true
