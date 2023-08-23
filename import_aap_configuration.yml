@@ -1,20 +1,21 @@
 ---
 - hosts: localhost
+  name: Import AAP config
   connection: local
 
-  collections: 
-  - ansible.controller
-  
-  pre_tasks:
-  - name: set fact on the configs directory
-    set_fact: 
-      config_path: "{{ playbook_dir }}/configurations"
+  collections:
+    - ansible.controller
 
-  - name: Include configurations from configurations' directory
-    include_vars:
-      dir: "{{ config_path }}" 
-      extensions: ["yml","json"]
-    register: config_files
+  pre_tasks:
+    - name: set fact on the configs directory
+      ansible.builtin.set_fact: 
+        config_path: "{{ playbook_dir }}/configurations"
+
+    - name: Include configurations from configurations' directory
+      include_vars:
+        dir: "{{ config_path }}" 
+        extensions: ["yml","json"]
+      register: config_files
 
   tasks:
   - name: Import Assets
