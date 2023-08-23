@@ -10,7 +10,7 @@
 
     - name: Clone AWS Inventory Repo
       ansible.builtin.git:
-        repo: "{{ github_reponame }}"
+        repo: "{{ git_repo }}"
         dest: "{{ git_working_directory }}"
         clone: true
         update: true
@@ -78,7 +78,7 @@
         (output.stderr != ""))
 
     - name: Set remote url
-      ansible.builtin.shell: "git remote set-url origin https://{{ git_username }}:{{ git_token }}@github.com/{{ git_username }}/{{ repo_name }}.git"
+      ansible.builtin.shell: "git remote set-url origin https://{{ git_username }}:{{ git_token }}@github.com/{{ git_username }}/{{ github_reponame }}.git"
       args:
         chdir: "{{ git_working_directory }}"
       no_log: true
