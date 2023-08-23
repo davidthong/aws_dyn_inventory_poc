@@ -25,7 +25,7 @@
       args:
         chdir: "{{ git_working_directory }}"
 
-    - name: Set facts
+    - name: Create temporary list of accounts. The aws list-accounts will replace this when we get access.
       ansible.builtin.set_fact:
         aws_accounts_list:
           - 511309077648
