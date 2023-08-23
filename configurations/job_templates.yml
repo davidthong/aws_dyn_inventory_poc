@@ -6,12 +6,14 @@ job_templates:
   extra_vars: '---'
   force_handlers: false
   forks: 0
-  inventory: Demo Inventory
+  inventory: 
+    name: Demo Inventory
   natural_key:
     name: Create/Update and Push Inventory Sources
     type: job_template
   playbook: build_and_push_inventory_sources.yml
-  project: David POC
+  project: 
+    name: David POC
   related:
     credentials: AIG Custom Github
 
