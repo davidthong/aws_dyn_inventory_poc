@@ -1,12 +1,12 @@
 ---
-job_templates:
+controller_templates:
 - name: Create/Update and Push Inventory Sources
   description: 'Loop through all AWS accounts and create/update AWS inventory sources'
   inventory: Demo Inventory
   playbook: build_and_push_inventory_sources.yml
   project: David POC
-  #credentials: 
-   #   - 'Cloud: AIG Custom Github'
+  credentials: 
+    - AIG Custom Github
   #    organization: null
    #   type: credential
   #   labels: []
