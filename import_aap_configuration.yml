@@ -18,6 +18,10 @@
       register: config_files
 
   tasks:
+
+  - name: Current version of ansible controller 
+    ansible.builtin.shell: ansible-galaxy collection list
+
   - name: Import Assets
     ansible.controller.import: 
       assets: "{{ config_files.ansible_facts | from_yaml | to_json }}" 
