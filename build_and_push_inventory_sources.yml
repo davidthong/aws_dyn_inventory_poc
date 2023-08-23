@@ -106,7 +106,6 @@
       changed_when:
         - (pull_request_results.status == 201) or (pull_request_results.status == 200)
       register: pull_request_results
-      no_log: true
 
     - name: Debug custom_exported_data
       ansible.builtin.debug:
