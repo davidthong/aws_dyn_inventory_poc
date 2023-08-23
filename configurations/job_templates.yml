@@ -15,9 +15,9 @@ job_templates:
     name: David POC
     organization: {name: Default, type: organization}
     type: project
-  related:
-    credentials: 
-      - 'AIG Custom Github'
+  # related:
+  #   credentials: 
+  #     - 'AIG Custom Github'
   #    organization: null
    #   type: credential
   #   labels: []
