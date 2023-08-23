@@ -15,9 +15,13 @@
       clone: yes
       update: yes
       version: main
+  
+  - name: Create Branch 
+    ansible.builtin.set_fact:
+      git_branch: "aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
 
   - name: "Create a new branch with current timestamp"
-    ansible.builtin.shell: "git checkout -b aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
+    ansible.builtin.shell: "git checkout -b {{ git_branch }}"
     args:
       chdir: "{{ git_working_directory }}"
 
@@ -56,7 +60,8 @@
     ansible.builtin.shell: |
       git config --global user.name "rhaap"
       git config --global user.email "rhaap@rhaap.com"
-      git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible  " && git push
+      git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible  " 
+      && git push --set-upstream origin "{{ git_branch }}"
     args:
       chdir: "{{ git_working_directory }}"
     ignore_errors: true
