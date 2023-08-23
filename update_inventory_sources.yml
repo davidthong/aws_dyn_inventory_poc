@@ -1,0 +1,20 @@
+---
+- name: Update Inventory Sources
+  hosts: localhost
+  connection: local
+  vars_files: aws_inventory_sources.yml
+
+  tasks:
+
+      # TODO create a scheduled job for this.
+    - name: Update AWS inventory sources
+      ansible.controller.inventory_source_update:
+        name: "AWS EC2 - {{ aws_account }}"
+        inventory: "{{ inventory_name }}"
+      loop: "{{ aig_aws_accounts }}"
+      loop_control:
+         loop_var: aws_account
+      
+    
+    
+   

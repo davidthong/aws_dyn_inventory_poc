@@ -8,7 +8,7 @@
 
     - name: Create Inventory
       ansible.controller.inventory:
-          name: "POC AWS"
+          name: "{{ inventory_name }}"
           description: ""
           organization: "Default"
           state: present
@@ -17,7 +17,7 @@
       ansible.controller.inventory_source:
         name: "AWS EC2 - {{ aws_account }}"
         description: "POC"
-        inventory: "POC AWS"
+        inventory: "{{ inventory_name }}"
         overwrite: True
         update_on_launch: True
         overwrite_vars: True
@@ -29,14 +29,5 @@
       loop: "{{ aig_aws_accounts }}"
       loop_control:
          loop_var: aws_account
-   
-
-
-    # - name: Update AWS inventory sources
-    #   ansible.controller.inventory_source_update:
-    #     name: "AWS EC2 - {{survey_patch_group }}"
-    #     inventory: "Patch Group - {{ survey_patch_group }}"
-    #   when: survey_aws_vpc is defined
-    
     
    

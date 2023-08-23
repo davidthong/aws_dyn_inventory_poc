@@ -7,7 +7,7 @@
     - main.yml
 
   tasks:
- 
+
     - name: Clone AWS Inventory Repo
       ansible.builtin.git:
         repo: "{{ git_repo }}"
@@ -53,10 +53,11 @@
         dest: "{{ git_working_directory }}"
         src: "{{ item }}"
         force: true
+        mode: "0755"
       loop:
         - "{{ playbook_dir }}/inventory"
         - "{{ playbook_dir }}/vars"
-       
+
     - name: "Commit Inventory Changes"
       ansible.builtin.shell: |
         git config --global user.name "rhaap"
@@ -81,11 +82,11 @@
       args:
         chdir: "{{ git_working_directory }}"
       no_log: true
-      
+
     - name: Push Changes
       ansible.builtin.shell: "git push --set-upstream origin {{ git_branch }} --force"
       args:
         chdir: "{{ git_working_directory }}"
       register: push_output
 
-    ## TODO - automate pull request with API 
+# TODO - automate pull request with API
