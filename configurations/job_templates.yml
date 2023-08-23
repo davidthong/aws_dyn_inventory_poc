@@ -3,8 +3,6 @@ job_templates:
 - name: Create/Update and Push Inventory Sources
   description: 'Loop through all AWS accounts and create/update AWS inventory sources'
   execution_environment: null
-  extra_vars: '---'
-  force_handlers: false
   forks: 0
   inventory: 
     name: Demo Inventory
