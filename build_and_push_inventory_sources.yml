@@ -94,11 +94,11 @@
         method: POST
         headers:
           Accept: "application/vnd.github+json"
-          Authorization: "Bearer {{ git_token }}"
+          Authorization: "Bearer {{ github_token }}"
         url: "{{ github_api_url }}"
         body:
           title: "AWS Inventory Changes - {{ ansible_date_time.date }} @ {{ ansible_date_time.time }}"
-          head: "{{ git_username }}:{{ git_develop_branch }}"
+          head: "{{ github_username }}:{{ git_develop_branch }}"
           base: "{{ git_base_branch }}"
         body_format: json
         validate_certs: false
