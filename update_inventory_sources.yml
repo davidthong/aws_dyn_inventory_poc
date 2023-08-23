@@ -2,7 +2,9 @@
 - name: Update Inventory Sources
   hosts: localhost
   connection: local
-  vars_files: aws_inventory_sources.yml
+  vars_files: 
+   - aws_inventory_sources.yml
+   -  - main.yml
 
   tasks:
 
