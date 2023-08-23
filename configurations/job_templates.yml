@@ -1,5 +1,5 @@
 ---
-controller_templates:
+job_template:
 - name: Create/Update and Push Inventory Sources
   description: 'Loop through all AWS accounts and create/update AWS inventory sources'
   inventory: Demo Inventory
