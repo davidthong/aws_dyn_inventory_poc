@@ -49,7 +49,7 @@
       loop: "{{ aig_aws_accounts }}"
 
     - name: Copy generated inventory and aws inventory sources master list to git working directory
-      anible.builtin.copy:
+      ansible.builtin.copy:
         dest: "{{ git_working_directory }}"
         src: "{{ item }}"
         force: true
