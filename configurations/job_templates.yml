@@ -2,8 +2,6 @@
 job_templates:
 - name: Create/Update and Push Inventory Sources
   description: 'Loop through all AWS accounts and create/update AWS inventory sources'
-  execution_environment: null
-  forks: 0
   inventory: 
     name: Demo Inventory
     organization: {name: Default, type: organization}
@@ -17,20 +15,11 @@ job_templates:
     name: David POC
     organization: {name: Default, type: organization}
     type: project
-  related:
-    credentials:
-    labels: []
-    notification_templates_error: []
-    notification_templates_started: []
-    notification_templates_success: []
-    schedules: []
-    survey_spec: {}
-  scm_branch: ''
-  skip_tags: ''
-  start_at_task: ''
-  survey_enabled: false
-  timeout: 0
-  use_fact_cache: false
-  verbosity: 1
-  webhook_credential: null
-  webhook_service: ''
+  # related:
+  #   credentials:
+  #   labels: []
+  #   notification_templates_error: []
+  #   notification_templates_started: []
+  #   notification_templates_success: []
+  #   schedules: []
+  #   survey_spec: {}
