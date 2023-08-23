@@ -12,6 +12,7 @@ job_templates:
     type: inventory
   natural_key:
     name: Create/Update and Push Inventory Sources
+    organization: {name: Default, type: organization}
     type: job_template
   playbook: build_and_push_inventory_sources.yml
   project: 
@@ -20,5 +21,3 @@ job_templates:
     type: project
   related:
     credentials: AIG Custom Github
-
-  
