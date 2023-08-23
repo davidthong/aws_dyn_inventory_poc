@@ -9,7 +9,7 @@ job_templates:
   inventory: 
     name: Demo Inventory
     organization: {name: Default, type: organization}
-    type: project
+    type: inventory
   natural_key:
     name: Create/Update and Push Inventory Sources
     type: job_template
