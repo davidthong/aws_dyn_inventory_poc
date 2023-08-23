@@ -76,9 +76,10 @@
       (output.stderr != ""))
 
   - name: Set remote url
-    ansible.builtin.shell: "git remote set-url origin https://davidthong:{{ github_pat }}@github.com/davidthong/aws_dyn_inventory_poc.git"
+    ansible.builtin.shell: "git remote set-url origin https://{{ git_username }}:{{ git_token }}@github.com/{{ git_username }}/aws_dyn_inventory_poc.git"
     args:
       chdir: "{{ git_working_directory }}"
+    no_log: true
     
   - name: Push Changes
     ansible.builtin.shell: "git push --set-upstream origin {{ git_branch }} --force"
