@@ -10,7 +10,7 @@
 
     - name: Clone AWS Inventory Repo
       ansible.builtin.git:
-        repo: "{{ git_repo }}"
+        repo: "{{ github_reponame }}"
         dest: "{{ git_working_directory }}"
         clone: true
         update: true
@@ -18,10 +18,10 @@
 
     - name: Create Branch
       ansible.builtin.set_fact:
-        git_branch: "aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
+        git_develop_branch: "aig_inventory_update_{{ ansible_date_time.iso8601_basic_short }}"
 
     - name: Create a new branch with current timestamp
-      ansible.builtin.shell: "git checkout -b {{ git_branch }}"
+      ansible.builtin.shell: "git checkout -b {{ git_develop_branch }}"
       args:
         chdir: "{{ git_working_directory }}"
 
@@ -31,7 +31,6 @@
           - 511309077648
           - 969289287447
           - 454534930493
-          - 349394834233
 
     - name: Copy Content
       ansible.builtin.blockinfile:
@@ -85,9 +84,36 @@
       no_log: true
 
     - name: Push Changes
-      ansible.builtin.shell: "git push --set-upstream origin {{ git_branch }} --force"
+      ansible.builtin.shell: "git push --set-upstream origin {{ git_develop_branch }} --force"
       args:
         chdir: "{{ git_working_directory }}"
       register: push_output
 
 # TODO - automate pull request with API
+    - name: create pull request
+      ansible.builtin.uri: 
+        method: POST
+        headers: 
+          Accept: "application/vnd.github+json"
+          Authorization: "Bearer {{ git_token }}"
+        url: "{{ github_api_url }}"  #"https://{{ github_username }}:{{ github_password }}@api.github.com/repos/{{ github_username }}/{{ github_reponame }}/pulls"
+        body: 
+          title: "PR for Inventory"
+          head: "{{ git_username }}:{{ git_develop_branch }}"
+          base: "{{ git_base_branch }}" 
+        body_format: json
+        validate_certs: False
+        status_code: [200,201,422]
+      changed_when: 
+      - (pull_request_results.status == 201) or (pull_request_results.status == 200)
+      register: pull_request_results
+      no_log: true
+
+    - name: debug custom_exported_data
+      ansible.builtin.debug: 
+        msg:
+        - "SUCCESS: HTTP Status - {{ pull_request_results.status }}"
+      when: 
+      - (ansible_verbosity <= 3)
+      - (ansible_verbosity >= 1)
+      - (pull_request_results.status == 201) or (pull_request_results.status == 200) or (pull_request_results.status == 422)
