@@ -1,0 +1,18 @@
+---
+job_templates:
+- name: Create/Update and Push Inventory Sources
+  description: 'Loop through all AWS accounts and create/update AWS inventory sources'
+  execution_environment: null
+  extra_vars: '---'
+  force_handlers: false
+  forks: 0
+  inventory: Demo Inventory
+  natural_key:
+    name: Create/Update and Push Inventory Sources
+    type: job_template
+  playbook: build_and_push_inventory_sources.yml
+  project: David POC
+  related:
+    credentials: AIG Custom Github
+
+  
