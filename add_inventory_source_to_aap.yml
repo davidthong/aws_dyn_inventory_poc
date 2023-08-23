@@ -15,7 +15,7 @@
      
     - name: Add AWS inventory source
       ansible.controller.inventory_source:
-        name: "AWS EC2 - POC"
+        name: "AWS EC2 - {{ aws_account }}"
         description: "POC"
         inventory: "POC AWS"
         overwrite: True
