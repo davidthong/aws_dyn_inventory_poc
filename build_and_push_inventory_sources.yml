@@ -30,6 +30,7 @@
       aws_accounts_list:
         - 511309077648
         - 311331131131
+        - 454534930493
 
   - name: Copy Content
     ansible.builtin.blockinfile:
