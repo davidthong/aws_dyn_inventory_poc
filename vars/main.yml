@@ -3,4 +3,4 @@ git_working_directory: /tmp/aws_inventory/
 github_reponame: aws_dyn_inventory_poc
 inventory_name: POC AWS
 git_base_branch: main
-github_api_url: "https://{{ git_username }}:{{ github_token }}@api.github.com/repos/{{ git_username }}/{{ github_reponame }}/pulls"
+github_api_url: "https://{{ git_username }}:{{ git_token }}@api.github.com/repos/{{ git_username }}/{{ github_reponame }}/pulls"
