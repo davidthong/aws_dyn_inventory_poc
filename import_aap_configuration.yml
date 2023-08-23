@@ -6,6 +6,9 @@
   collections:
     - ansible.controller
 
+  roles:
+    - {role: infra.controller_configuration.job_templates, when: controller_templates is defined}
+
   pre_tasks:
     - name: set fact on the configs directory
       ansible.builtin.set_fact: 
@@ -22,8 +25,10 @@
   - name: Current version of ansible controller 
     ansible.builtin.shell: ansible-galaxy collection list
 
-  - name: Import Assets
-    ansible.controller.import: 
-      assets: "{{ config_files.ansible_facts | from_yaml | to_json }}" 
-      validate_certs: False
-    register: import_results
+  
+
+  # - name: Import Assets
+  #   ansible.controller.import: 
+  #     assets: "{{ config_files.ansible_facts | from_yaml | to_json }}" 
+  #     validate_certs: False
+  #   register: import_results
