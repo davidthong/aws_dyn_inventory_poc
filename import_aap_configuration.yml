@@ -21,8 +21,5 @@
   - name: Import Assets
     ansible.controller.import: 
       assets: "{{ config_files.ansible_facts | from_yaml | to_json }}" 
-      controller_host: "{{ import_controller_host }}"
-      controller_username: "{{ import_controller_username }}"
-      controller_password: "{{ import_controller_password }}"
       validate_certs: False
     register: import_results
