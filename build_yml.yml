@@ -60,8 +60,7 @@
     ansible.builtin.shell: |
       git config --global user.name "rhaap"
       git config --global user.email "rhaap@rhaap.com"
-      git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible  " 
-      && git push --set-upstream origin "{{ git_branch }}"
+      git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible  " && git push --set-upstream origin "{{ git_branch }}"
     args:
       chdir: "{{ git_working_directory }}"
     ignore_errors: true
