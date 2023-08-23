@@ -5,6 +5,7 @@
   vars_files: 
     - aws_inventory_sources.yml
     - main.yml
+    - vault.yml
 
   tasks:
   
