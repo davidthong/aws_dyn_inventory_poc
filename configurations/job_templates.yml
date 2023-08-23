@@ -17,7 +17,7 @@ job_templates:
     type: project
   related:
     credentials: 
-      - AIG Custom Github
+      - 'AIG Custom Github'
   #    organization: null
    #   type: credential
   #   labels: []
