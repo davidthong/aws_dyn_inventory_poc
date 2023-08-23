@@ -14,7 +14,7 @@ job_templates:
   playbook: build_and_push_inventory_sources.yml
   project: 
     name: David POC
-    organization: Default
+    organization: {name: Default, type: organization}
     type: project
   related:
     credentials: AIG Custom Github
