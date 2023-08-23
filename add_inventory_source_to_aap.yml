@@ -2,6 +2,7 @@
 - name: Build Patch Group Inventory
   hosts: localhost
   connection: local
+  vars_files: aws_inventory_sources.yml
 
   tasks:
 
@@ -12,7 +13,6 @@
           organization: "Default"
           state: present
      
-
     - name: Add AWS inventory source
       ansible.controller.inventory_source:
         name: "AWS EC2 - POC"
@@ -24,8 +24,11 @@
         organization: Default
         source: "scm"
         source_project: "POC"
-        source_path: "inventory/poc.aws_ec2.yml"
+        source_path: "inventory/aig_{{ aws_account }}.aws_ec2.yml"
         credential: "AWS"
+      loop: "{{ aig_aws_accounts }}"
+      loop_control:
+         loop_var: aws_account
    
 
 

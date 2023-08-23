@@ -28,35 +28,34 @@
 
   - name: Set facts
     ansible.builtin.set_fact:
-      var2:
+      aws_accounts_list:
         - 511309077648
         - 311331131131
 
   - name: Copy Content
     ansible.builtin.blockinfile:
       path: vars/aws_inventory_sources.yml
-      block: "{{ var2 | to_nice_yaml }}"
+      block: "{{ aws_accounts_list | to_nice_yaml }}"
       insertafter: "aig_accounts"
       mode: "0755"
 
   - name: Build Inventory Sources
     ansible.builtin.template:
         src: aws_ec2.yml.j2
-        dest: inventory/aig_{{ aws_account }}_aws_ec2.yml
+        dest: inventory/aig_{{ aws_account }}.aws_ec2.yml
     loop_control:
         loop_var: aws_account
-    loop: "{{aig_aws_accounts}}"
+    loop: "{{ aig_aws_accounts }}"
 
-
-
-  - name: Copy generated inventory to git working directory
+  - name: Copy generated inventory and aws inventory sources master list to git working directory
     copy:
       dest: "{{ git_working_directory }}"
       src: "{{ item }}"
       force: true
     loop:
       - "{{ playbook_dir }}/inventory"
-
+      - "{{ playbook_dir }}/vars"
+      
   - name: "Commit Inventory Changes"
     ansible.builtin.shell: |
       git config --global user.name "rhaap"
@@ -86,3 +85,5 @@
     args:
       chdir: "{{ git_working_directory }}"
     register: push_output
+
+  ## TODO - automate PR 
