@@ -28,9 +28,8 @@
     - name: Create temporary list of accounts. The aws list-accounts will replace this when we get access.
       ansible.builtin.set_fact:
         aws_accounts_list:
-          - 511309077648
-          - 969289287447
-          - 454534930493
+          - 003459673313
+        aws_region: us-east-1
 
     - name: Copy Content
       ansible.builtin.blockinfile:
