@@ -1,7 +1,8 @@
 ---
 - name: Testing Windows an RHEL on same inventory
+  hosts: all
 
   tasks:
 
-  - name: Example from an Ansible Playbook
-    ansible.builtin.ping: 
+    - name: Example from an Ansible Playbook
+      ansible.builtin.ping:
