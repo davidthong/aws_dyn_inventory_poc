@@ -4,7 +4,7 @@ plugin: aws_ec2
 regions:
   - us-east-1
   
-iam_role_arn: "arn:aws:iam::003459673313:role/ansible-role"
+iam_role_arn: "arn:aws:iam::483848394834:role/ansible-role"
 
 #groups:
 #  linux: '"tag_ostype_linux" in (tags|list)'
