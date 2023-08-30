@@ -11,48 +11,10 @@ vpc_destination_variable: private_ip_address
 # keyed_groups may be used to create custom groups
 strict: False
 keyed_groups:
-  - prefix: tag
-    key: tags
-  # Add hosts to e.g. instance_type_z3_tiny
-  - prefix: instance_type
-    key: instance_type
-  # Create a group for each value of the Application tag
-  - key: tags.application
-    separator: ''
-  # Create a group per environment e.g. dev, qa, prod
-  - key: tags.environment
-    separator: ''
-  # Create a group per ostype e.g. linux or windows
-  - key: tags.ostype
-    separator: ''
-  # Create a group per function e.g. sso,db,proxy
-  - key: tags.function
-    separator: ''
-  # Create a group per type e.g. infrastructure,application,virt_appliance
-  - key: tags.type
-    separator: ''
-  # Create a group per region e.g. aws_region_us_east_2
-  - key: placement.region
-    prefix: aws_region
+
 groups:
   linux: '"tag_ostype_linux" in (tags|list)'
   windows: '"tag_ostype_windows" in (tags|list)'
-  dev: "'tag_environment_dev' in (tags|list)"
-  prod: "'tag_environment_prod' in (tags|list)"
-  qa: "'tag_environment_qa' in (tags|list)"
-  dmz_dev: "'tag_environment_dmz_dev' in (tags|list)"
-  dmz_qa: "'tag_environment_dmz_qa' in (tags|list)"
-  dmz_prod: "'tag_environment_dmz_prod' in (tags|list)"
-  test: "'tag_environment_test' in (tags|list)"
-  lab: "'tag_environment_lab' in (tags|list)"
-  infrastructure: "'tag_type_infrastructure' in (tags|list)"
-  application: "'tag_type_application' in (tags|list)"
-  virt_appliance: "'tag_type_virt_appliance' in (tags|list)"
-  sso: "'tag_function_sso' in (tags|list)"
-  db: "'tag_function_db' in (tags|list)"
-  proxy: "'tag_function_proxy' in (tags|list)"
-  VPC_Test_VPC: true
-  aws_ec2: true
 
 filters:
    tag:patchgroup: "prod5"
