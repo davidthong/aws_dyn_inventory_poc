@@ -1,6 +1,6 @@
 ---
 - name: Testing Windows an RHEL on same inventory
-  hosts: all
+  hosts: linux
 
   tasks:
 
