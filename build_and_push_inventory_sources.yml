@@ -29,6 +29,7 @@
       ansible.builtin.set_fact:
         aws_accounts_list:
           - 003459673313
+          - 483848394834
         aws_region: us-east-1
 
     - name: Copy Content
