@@ -7,7 +7,7 @@ regions:
 iam_role_arn: "arn:aws:iam::404388677917:role/ansible-role"
 
 groups:
-  linux: '"tag_ostype_linux" in (tags|list)'
+  linux: '"linux" in (tags|list)'
   windows: '"tag_ostype_windows" in (tags|list)'
 
 
