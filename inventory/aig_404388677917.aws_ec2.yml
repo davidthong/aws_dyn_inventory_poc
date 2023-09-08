@@ -9,7 +9,7 @@ iam_role_arn: "arn:aws:iam::404388677917:role/ansible-role"
 groups:
   #linux: '"linux" in (tags|list)'
   # windows: '"tag_ostype_windows" in (tags|list)'
-  windows: (tags['os_type'] is defined and tags['os_type'] == 'windows')
+  windows: (platform_details is defined and platform_details == 'Windows')
 
 
 # keyed_groups may be used to create custom groups
