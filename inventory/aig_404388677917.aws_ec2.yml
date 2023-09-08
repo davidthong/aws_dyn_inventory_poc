@@ -7,8 +7,8 @@ regions:
 iam_role_arn: "arn:aws:iam::404388677917:role/ansible-role"
 
 groups:
- # windows: (platform_details is defined and platform_details == 'Windows')
-
+  windows: (platform_details is defined and platform_details == 'Windows')
+  linux: (platform_details is defined and platform_details == 'Linux')
 
 # keyed_groups may be used to create custom groups
 strict: False
