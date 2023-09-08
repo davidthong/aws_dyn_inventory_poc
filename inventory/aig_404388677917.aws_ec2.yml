@@ -1,0 +1,21 @@
+---
+plugin: aws_ec2
+
+regions:
+  - us-east-1
+  
+iam_role_arn: "arn:aws:iam::404388677917:role/ansible-role"
+
+#groups:
+#  linux: '"tag_ostype_linux" in (tags|list)'
+#  windows: '"tag_ostype_windows" in (tags|list)'
+
+
+# keyed_groups may be used to create custom groups
+strict: False
+keyed_groups:
+
+
+
+filters:
+   
