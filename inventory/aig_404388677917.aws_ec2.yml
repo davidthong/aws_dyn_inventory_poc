@@ -13,7 +13,7 @@ groups:
 # keyed_groups may be used to create custom groups
 strict: False
 keyed_groups:
-   - key: platform_details
+ #  - key: platform_details
 
 
 
