@@ -18,7 +18,6 @@ groups:
 
 filters:
    tag:patchgroup: "prod5"
-   
   # Note: I(hostnames) sets the inventory_hostname. To modify ansible_host without modifying
 # inventory_hostname use compose (see example below).
 hostnames:
