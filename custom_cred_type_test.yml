@@ -1,0 +1,10 @@
+---
+ - name: Test Custom Cred String
+   hosts: localhost
+   connection: local
+
+   tasks:
+
+     - name: Output String
+       ansible.builtin.debug: 
+         msg: '{{ test1}}'
