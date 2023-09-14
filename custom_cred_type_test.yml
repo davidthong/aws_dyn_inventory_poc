@@ -14,4 +14,4 @@
 
      - name: Output String
        ansible.builtin.debug: 
-         msg: "{{ windows }}"
+         msg: '"{{ windows }}"'
