@@ -3,7 +3,7 @@
    hosts: localhost
    connection: local
    vars:
-      windows: '"something\user"'
+      windows: something\user
 
    tasks:
 
@@ -14,4 +14,4 @@
 
      - name: Output String
        ansible.builtin.debug: 
-         msg: '"{{ windows }}"'
+         msg: '\"{{ windows }}"'
