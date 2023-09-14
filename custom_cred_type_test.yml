@@ -2,9 +2,16 @@
  - name: Test Custom Cred String
    hosts: localhost
    connection: local
+   vars:
+      windows: "something\user"
 
    tasks:
 
      - name: Output String
        ansible.builtin.debug: 
          msg: "{{ test1 }}"
+    
+
+     - name: Output String
+       ansible.builtin.debug: 
+         msg: "{{ windows }}"
